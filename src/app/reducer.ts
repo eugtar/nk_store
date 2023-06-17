@@ -1,6 +1,6 @@
-import { IInitialState, IReducerAction } from "@/types";
+import { IInitialState, IReducerTA } from "@/types";
 
-const reducer = (state: IInitialState, action: IReducerAction) => {
+const reducer = (state: IInitialState, action: IReducerTA) => {
   switch (action.type) {
     case "TOGGLE_CART": {
       return { ...state, cartState: !state.cartState };

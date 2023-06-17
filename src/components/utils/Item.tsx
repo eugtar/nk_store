@@ -1,4 +1,5 @@
 import useGlobalContext from "@/hooks/useGlobalContext";
+import { IStoreItem } from "@/types";
 import { StarIcon, ShoppingBagIcon } from "@heroicons/react/24/solid";
 import React from "react";
 
@@ -64,7 +65,7 @@ const Item: React.FC<IProps> = (props) => {
               type="button"
               title="Add to Bag"
               className="blur_effect_theme button_theme bg-white/90 p-0.5 shadow shadow-sky-200"
-              onClick={() => context?.addItem(item)}
+              onClick={() => context?.addItem(item as IStoreItem)}
             >
               <ShoppingBagIcon className="icon_style text-slate-900" />
             </button>
@@ -72,7 +73,7 @@ const Item: React.FC<IProps> = (props) => {
               type="button"
               title={props.btn}
               onClick={() => {
-                context?.addItem(item);
+                context?.addItem(item as IStoreItem);
                 context?.toggleCart();
               }}
               className="blur_effect_theme button_theme bg-white/90 px-2 py-1 text-sm text-black shadow shadow-sky-200"
