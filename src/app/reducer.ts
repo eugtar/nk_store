@@ -1,6 +1,6 @@
-import { IItem, IStore } from "@/types";
+import { IInitialState, IReducerAction } from "@/types";
 
-const reducer = (state, action) => {
+const reducer = (state: IInitialState, action: IReducerAction) => {
   switch (action.type) {
     case "TOGGLE_CART": {
       return { ...state, cartState: !state.cartState };
@@ -14,7 +14,7 @@ const reducer = (state, action) => {
         state.cartItems[itemIndex].cartQuantity += 1;
       }
       if (itemIndex === -1) {
-        state.cartItems.push(temp);
+        state.cartItems.push(temp as never);
       }
       localStorage.setItem("cart", JSON.stringify(state.cartItems));
       return { ...state };
@@ -46,18 +46,14 @@ const reducer = (state, action) => {
       return { ...state };
     }
     case "GET_TOTALS": {
-      const { totalAmount, totalQTY } = state.cartItems.reduce(
-        (cartTotal, cartItem) => {
-          const { price, cartQuantity } = cartItem;
-          const totalPrice = price * cartQuantity;
-
-          cartTotal.totalAmount += totalPrice;
-          cartTotal.totalQTY += cartQuantity;
-
-          return cartTotal;
-        },
-        { totalAmount: 0, totalQTY: 0 }
-      );
+      let totalAmount = 0,
+        totalQTY = 0;
+      state.cartItems.forEach((cartItem) => {
+        const { price, cartQuantity } = cartItem;
+        const totalPrice = parseInt(price) * cartQuantity;
+        totalAmount += totalPrice;
+        totalQTY += cartQuantity;
+      });
       localStorage.setItem("total", JSON.stringify({ totalAmount, totalQTY }));
       return {
         ...state,

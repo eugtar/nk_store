@@ -1,9 +1,9 @@
-import { IItem } from "@/types";
+import { IStoreItem } from "@/types";
 import React from "react";
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import useGlobalContext from "@/hooks/useGlobalContext";
 
-const CartItem: React.FC<IItem> = (props) => {
+const CartItem: React.FC<IStoreItem> = (props) => {
   const context = useGlobalContext();
 
   return (

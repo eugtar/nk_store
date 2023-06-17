@@ -2,7 +2,7 @@ import React from "react";
 import GlobalContext from "./GlobalContext";
 import initialState from "@/app/initialState";
 import reducer from "@/app/reducer";
-import { IItem } from "@/types";
+import { IReducerAction, IStoreItem, IInitialState } from "@/types";
 import toast from "react-hot-toast";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
@@ -11,28 +11,30 @@ interface IProps {
 }
 
 const GlobalProvider: React.FC<IProps> = ({ children }) => {
+  const [storeState, dispatch]: [
+    IInitialState,
+    (value: IReducerAction) => void
+  ] = React.useReducer(reducer, initialState);
   const [isNavActive, setIsNavActive] = React.useState<boolean>(false);
   const breakpoint = useBreakpoint();
-
-  const [storeState, dispatch] = React.useReducer(reducer, initialState);
 
   const toggleCart = () => {
     dispatch({ type: "TOGGLE_CART" });
   };
 
-  const addItem = (item: IItem) => {
+  const addItem = (item: IStoreItem) => {
     dispatch({ type: "ADD_ITEM", payload: item });
     dispatch({ type: "GET_TOTALS" });
     toast.success(`${item.title} Added to Cart!`);
   };
 
-  const removeItem = (item: IItem) => {
+  const removeItem = (item: IStoreItem) => {
     dispatch({ type: "REMOVE_ITEM", payload: item });
     dispatch({ type: "GET_TOTALS" });
     toast.success(`${item.title} Remove From Cart!`);
   };
 
-  const deleteItem = (item: IItem) => {
+  const deleteItem = (item: IStoreItem) => {
     dispatch({ type: "DELETE_ITEM", payload: item });
     dispatch({ type: "GET_TOTALS" });
     toast.success(`${item.title} Remove From Cart!`);
@@ -46,6 +48,17 @@ const GlobalProvider: React.FC<IProps> = ({ children }) => {
     }
   };
 
+  const value = {
+    breakpoint,
+    isNavActive,
+    storeState,
+    toggleCart,
+    addItem,
+    removeItem,
+    deleteItem,
+    clearCartItems,
+  };
+
   React.useEffect(() => {
     const onWinScroll = () => {
       const scrollPY = window.pageYOffset > 30 ? true : false;
@@ -56,16 +69,6 @@ const GlobalProvider: React.FC<IProps> = ({ children }) => {
     return () => window.removeEventListener("scroll", onWinScroll);
   }, []);
 
-  const value = {
-    breakpoint,
-    isNavActive,
-    toggleCart,
-    addItem,
-    removeItem,
-    deleteItem,
-    clearCartItems,
-    storeState,
-  };
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
   );

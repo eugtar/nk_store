@@ -3,7 +3,7 @@ import CartCount from "./cart/CartCount";
 import CartEmpty from "./cart/CartEmpty";
 import CartItem from "./cart/CartItem";
 import useGlobalContext from "@/hooks/useGlobalContext";
-import { IItem } from "@/types";
+import { IStoreItem } from "@/types";
 
 const Cart: React.FC = () => {
   const context = useGlobalContext();
@@ -25,7 +25,7 @@ const Cart: React.FC = () => {
             <>
               <div className="scroll_hidden mb-3 flex h-[78vh] flex-col items-start justify-start gap-y-7 overflow-y-scroll scroll-smooth py-3 lg:gap-y-5">
                 {context?.storeState.cartItems.map(
-                  (item: IItem, index: number) => {
+                  (item: IStoreItem, index: number) => {
                     return <CartItem key={index} {...item} />;
                   }
                 )}

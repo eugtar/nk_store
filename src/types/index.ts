@@ -1,4 +1,4 @@
-export interface IItem {
+export interface IStoreItem {
   id: string;
   title: string;
   text: string;
@@ -9,23 +9,28 @@ export interface IItem {
   cartQuantity: number;
 }
 
-export interface IStore {
+export interface IInitialState {
   cartState: boolean;
-  cartItems: IItem[] | [];
+  cartItems: IStoreItem[] | [];
   cartTotalAmount: number;
   cartTotalQantity: number;
 }
 
-export type TGContext = {
-  breakpoint?: number;
-  isNavActive?: boolean;
-  toggleCart?: () => void;
-  addItem?: (value: IItem) => void;
-  removeItem?: (value: IItem) => void;
-  deleteItem?: (value: IItem) => void;
-  clearCartItems?: () => void;
-  state?: IStore;
-};
+export interface IReducerAction {
+  type: string;
+  payload: IStoreItem;
+}
+
+export interface IGlobalContext {
+  breakpoint: number;
+  isNavActive: boolean;
+  storeState: IInitialState;
+  toggleCart: () => void;
+  addItem: (value: IStoreItem) => void;
+  removeItem: (value: IStoreItem) => void;
+  deleteItem: (value: IStoreItem) => void;
+  clearCartItems: () => void;
+}
 
 export interface IHeroapi {
   title: string;

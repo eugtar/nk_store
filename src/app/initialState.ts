@@ -1,6 +1,6 @@
-import { IStore } from "@/types";
+import { IInitialState } from "@/types";
 
-const initialState: IStore = {
+const initialState: IInitialState = {
   cartState: false,
   cartItems: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart") as string)
