@@ -16,9 +16,13 @@ export interface IInitialState {
   cartTotalQantity: number;
 }
 
-export interface IReducerAction {
+export interface IReducerTA {
   type: string;
   payload: IStoreItem;
+}
+
+export interface IReducerT {
+  type: string;
 }
 
 export interface IGlobalContext {

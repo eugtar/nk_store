@@ -2,7 +2,7 @@ import React from "react";
 import GlobalContext from "./GlobalContext";
 import initialState from "@/app/initialState";
 import reducer from "@/app/reducer";
-import { IReducerAction, IStoreItem, IInitialState } from "@/types";
+import { IReducerTA, IStoreItem, IInitialState, IReducerT } from "@/types";
 import toast from "react-hot-toast";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
@@ -13,7 +13,7 @@ interface IProps {
 const GlobalProvider: React.FC<IProps> = ({ children }) => {
   const [storeState, dispatch]: [
     IInitialState,
-    (value: IReducerAction) => void
+    (value: IReducerTA | IReducerT) => void
   ] = React.useReducer(reducer, initialState);
   const [isNavActive, setIsNavActive] = React.useState<boolean>(false);
   const breakpoint = useBreakpoint();
