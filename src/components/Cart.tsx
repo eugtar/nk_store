@@ -12,7 +12,7 @@ const Cart: React.FC = () => {
     <>
       <div
         className={`blur_effect_theme fixed bottom-0 left-0 right-0 top-0 z-[120] h-screen w-full ${
-          context?.storeState?.cartState
+          context?.state.cartState
             ? "visible translate-x-0 opacity-100"
             : "invisible translate-x-8 opacity-0"
         }`}
@@ -21,10 +21,10 @@ const Cart: React.FC = () => {
           className={`blur_effect_theme absolute right-0 h-screen w-full max-w-xl`}
         >
           <CartCount />
-          {context?.storeState.cartItems.length ? (
+          {context?.state.cartItems.length ? (
             <>
               <div className="scroll_hidden mb-3 flex h-[78vh] flex-col items-start justify-start gap-y-7 overflow-y-scroll scroll-smooth py-3 lg:gap-y-5">
-                {context?.storeState.cartItems.map(
+                {context?.state.cartItems.map(
                   (item: IStoreItem, index: number) => {
                     return <CartItem key={index} {...item} />;
                   }
@@ -36,7 +36,7 @@ const Cart: React.FC = () => {
                     SubTotal
                   </h1>
                   <h1 className="bg_theme_cart rounded px-1 py-0.5 text-sm text-slate-100">
-                    ${context?.storeState.cartTotalAmount}
+                    ${context?.state.cartTotalAmount}
                   </h1>
                 </div>
                 <div className="grid items-center gap-2">

@@ -1,6 +1,7 @@
-import { IInitialState, IReducerTA } from "@/types";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IInitialState } from "@/types";
 
-const reducer = (state: IInitialState, action: IReducerTA) => {
+const reducer = (state: IInitialState, action: any) => {
   switch (action.type) {
     case "TOGGLE_CART": {
       return { ...state, cartState: !state.cartState };

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import GlobalContext from "./GlobalContext";
 import initialState from "@/app/initialState";
 import reducer from "@/app/reducer";
-import { IReducerTA, IStoreItem, IInitialState, IReducerT } from "@/types";
+import { IReducerTA, IStoreItem, IReducerT } from "@/types";
 import toast from "react-hot-toast";
 import useBreakpoint from "@/hooks/useBreakpoint";
 
@@ -11,10 +12,8 @@ interface IProps {
 }
 
 const GlobalProvider: React.FC<IProps> = ({ children }) => {
-  const [storeState, dispatch]: [
-    IInitialState,
-    (value: IReducerTA | IReducerT) => void
-  ] = React.useReducer(reducer, initialState);
+  const [state, dispatch]: [any, (value: IReducerTA | IReducerT) => void] =
+    React.useReducer<any>(reducer, initialState);
   const [isNavActive, setIsNavActive] = React.useState<boolean>(false);
   const breakpoint = useBreakpoint();
 
@@ -41,7 +40,7 @@ const GlobalProvider: React.FC<IProps> = ({ children }) => {
   };
 
   const clearCartItems = () => {
-    if (storeState.cartItems.length) {
+    if (state.cartItems.length) {
       dispatch({ type: "CLEAR_ITEMS" });
       dispatch({ type: "GET_TOTALS" });
       toast.success(`Cart Cleared!`);
@@ -51,7 +50,7 @@ const GlobalProvider: React.FC<IProps> = ({ children }) => {
   const value = {
     breakpoint,
     isNavActive,
-    storeState,
+    state,
     toggleCart,
     addItem,
     removeItem,

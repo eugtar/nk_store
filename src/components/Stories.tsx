@@ -1,12 +1,11 @@
 import React from "react";
 import { story } from "@/data";
 import { Title } from "./utils";
-import { register } from "swiper/element";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { HashtagIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import useGlobalContext from "@/hooks/useGlobalContext";
-
-register();
+import "swiper/css";
 
 const Stories: React.FC = () => {
   const context = useGlobalContext();
@@ -15,15 +14,14 @@ const Stories: React.FC = () => {
     <div className="nike_container mb-11">
       <Title title={story.title} />
       <div className="mt-7">
-        <swiper-container
-          navigation="true"
-          loop="true"
-          slides-per-view={`${context?.breakpoint}`}
+        <Swiper
+          loop
+          slidesPerView={context?.breakpoint}
           allow-touch-move="true"
         >
           {story?.news.map((item, index) => {
             return (
-              <swiper-slide key={index}>
+              <SwiperSlide key={index}>
                 <div className="relative mb-0.5 grid items-center gap-4 rounded-lg pb-2 shadow shadow-slate-200 ring-1 ring-slate-200">
                   <div className="flex items-center justify-center">
                     <img
@@ -68,10 +66,10 @@ const Stories: React.FC = () => {
                     </a>
                   </div>
                 </div>
-              </swiper-slide>
+              </SwiperSlide>
             );
           })}
-        </swiper-container>
+        </Swiper>
       </div>
     </div>
   );

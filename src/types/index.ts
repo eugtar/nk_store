@@ -28,7 +28,7 @@ export interface IReducerT {
 export interface IGlobalContext {
   breakpoint: number;
   isNavActive: boolean;
-  storeState: IInitialState;
+  state: IInitialState;
   toggleCart: () => void;
   addItem: (value: IStoreItem) => void;
   removeItem: (value: IStoreItem) => void;

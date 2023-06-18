@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
                       : "bg-slate-100 text-slate-900 shadow-slate-100"
                   }`}
                 >
-                  {context?.storeState.cartTotalQantity}
+                  {context?.state.cartTotalQantity}
                 </div>
               </button>
             </li>

@@ -21,7 +21,7 @@ const CartCount: React.FC = () => {
             <h1 className="text-base font-medium text-slate-900">
               Your Cart{" "}
               <span className="bg_theme_cart rounded px-1 py-0.5 text-xs font-normal text-slate-100">
-                {context?.storeState.cartTotalQantity} Items
+                {context?.state.cartTotalQantity} Items
               </span>
             </h1>
           </div>
